@@ -75,7 +75,7 @@ static void MX_GPIO_Init(void){
 
 }
 
-int main(void){
+int main2(void){
 
 	  SystemInit();
 	  HAL_Init();
