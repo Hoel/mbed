@@ -228,7 +228,7 @@
 								<option id="gnu.cpp.link.option.paths.118864444" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" useByScannerDiscovery="false" valueType="libPaths">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/CMSIS/core}&quot;"/>
 								</option>
-								<option id="fr.ac6.managedbuild.tool.gnu.cross.cpp.linker.script.1786251520" superClass="fr.ac6.managedbuild.tool.gnu.cross.cpp.linker.script" useByScannerDiscovery="false" value="/Users/hoel/Documents/workspace/STM32F303CC_LED_HAL_MBED/src/targets/TARGET_STM/TARGET_STM32F3/TARGET_STM32F303xC/device/TOOLCHAIN_GCC_ARM/STM32F303XC.ld" valueType="string"/>
+								<option id="fr.ac6.managedbuild.tool.gnu.cross.cpp.linker.script.1786251520" name="Linker Script (-T)" superClass="fr.ac6.managedbuild.tool.gnu.cross.cpp.linker.script" useByScannerDiscovery="false" value="/Users/hoel/Documents/GitHub/mbed/STM32F303CC_LED_HAL_MBED/src/targets/TARGET_STM/TARGET_STM32F3/TARGET_STM32F303xC/device/TOOLCHAIN_GCC_ARM/STM32F303XC.ld" valueType="string"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.491570268" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>

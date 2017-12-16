@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 #include <TARGET_STM32F303xC/device/cmsis.h>
-#include <core_cm4.h>
+
 #if defined(NVIC_NUM_VECTORS)
 
 #include "drivers/InterruptManager.h"
