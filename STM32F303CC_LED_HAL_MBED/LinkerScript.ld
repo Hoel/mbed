@@ -145,6 +145,14 @@ SECTIONS
     . = ALIGN(4);
   } >ROM
 
+    .heap (COPY):
+    {
+        __end__ = .;
+        end = __end__;
+        *(.heap*)
+        __HeapLimit = .;
+    } > RAM
+
   /* Used by the startup to initialize data */
   _sidata = LOADADDR(.data);
 

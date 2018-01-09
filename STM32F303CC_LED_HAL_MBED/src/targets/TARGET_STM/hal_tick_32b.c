@@ -16,6 +16,7 @@
 #include <TARGET_STM32F303xC/device/hal_tick.h>
 
 // A 32-bit timer is used
+#define TIM_MST_16BIT 1
 #if !TIM_MST_16BIT
 
 #define DEBUG_TICK 0 // Set to 1 to toggle a pin (see below which pin) at each tick

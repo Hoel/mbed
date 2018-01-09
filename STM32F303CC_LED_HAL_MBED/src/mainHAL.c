@@ -75,9 +75,9 @@ static void MX_GPIO_Init(void){
 
 }
 
-int main2(void){
+int main(void){
 
-	  SystemInit();
+	  //SystemInit();
 	  HAL_Init();
 	  SystemClock_Config();
 	  MX_GPIO_Init();

@@ -12,41 +12,132 @@
 
 void SystemInit(void)
 {
-  /* FPU settings ------------------------------------------------------------*/
-  #if (__FPU_PRESENT == 1) && (__FPU_USED == 1)
-    SCB->CPACR |= ((3UL << 10*2)|(3UL << 11*2));  /* set CP10 and CP11 Full Access */
-  #endif
+//  /* FPU settings ------------------------------------------------------------*/
+//  #if (__FPU_PRESENT == 1) && (__FPU_USED == 1)
+//    SCB->CPACR |= ((3UL << 10*2)|(3UL << 11*2));  /* set CP10 and CP11 Full Access */
+//  #endif
+//
+//  /* Reset the RCC clock configuration to the default reset state ------------*/
+//  /* Set HSION bit */
+//  RCC->CR |= 0x00000001U;
+//
+//  /* Reset CFGR register */
+//  RCC->CFGR &= 0xF87FC00CU;
+//
+//  /* Reset HSEON, CSSON and PLLON bits */
+//  RCC->CR &= 0xFEF6FFFFU;
+//
+//  /* Reset HSEBYP bit */
+//  RCC->CR &= 0xFFFBFFFFU;
+//
+//  /* Reset PLLSRC, PLLXTPRE, PLLMUL and USBPRE bits */
+//  RCC->CFGR &= 0xFF80FFFFU;
+//
+//  /* Reset PREDIV1[3:0] bits */
+//  RCC->CFGR2 &= 0xFFFFFFF0U;
+//
+//  /* Reset USARTSW[1:0], I2CSW and TIMs bits */
+//  RCC->CFGR3 &= 0xFF00FCCCU;
+//
+//  /* Disable all interrupts */
+//  RCC->CIR = 0x00000000U;
+//
+//#ifdef VECT_TAB_SRAM
+//  SCB->VTOR = SRAM_BASE | VECT_TAB_OFFSET; /* Vector Table Relocation in Internal SRAM */
+//#else
+//  SCB->VTOR = FLASH_BASE | VECT_TAB_OFFSET; /* Vector Table Relocation in Internal FLASH */
+//#endif
 
-  /* Reset the RCC clock configuration to the default reset state ------------*/
-  /* Set HSION bit */
-  RCC->CR |= 0x00000001U;
+	  /* FPU settings ------------------------------------------------------------*/
+	  #if (__FPU_PRESENT == 1) && (__FPU_USED == 1)
+	    SCB->CPACR |= ((3UL << 10*2)|(3UL << 11*2));  /* set CP10 and CP11 Full Access */
+	  #endif
 
-  /* Reset CFGR register */
-  RCC->CFGR &= 0xF87FC00CU;
+	  /* Reset the RCC clock configuration to the default reset state ------------*/
+	  /* Set HSION bit */
+	  RCC->CR |= 0x00000001U;
 
-  /* Reset HSEON, CSSON and PLLON bits */
-  RCC->CR &= 0xFEF6FFFFU;
+	  /* Reset CFGR register */
+	  RCC->CFGR &= 0xF87FC00CU;
 
-  /* Reset HSEBYP bit */
-  RCC->CR &= 0xFFFBFFFFU;
+	  /* Reset HSEON, CSSON and PLLON bits */
+	  RCC->CR &= 0xFEF6FFFFU;
 
-  /* Reset PLLSRC, PLLXTPRE, PLLMUL and USBPRE bits */
-  RCC->CFGR &= 0xFF80FFFFU;
+	  /* Reset HSEBYP bit */
+	  RCC->CR &= 0xFFFBFFFFU;
 
-  /* Reset PREDIV1[3:0] bits */
-  RCC->CFGR2 &= 0xFFFFFFF0U;
+	  /* Reset PLLSRC, PLLXTPRE, PLLMUL and USBPRE bits */
+	  RCC->CFGR &= 0xFF80FFFFU;
 
-  /* Reset USARTSW[1:0], I2CSW and TIMs bits */
-  RCC->CFGR3 &= 0xFF00FCCCU;
+	  /* Reset PREDIV1[3:0] bits */
+	  RCC->CFGR2 &= 0xFFFFFFF0U;
 
-  /* Disable all interrupts */
-  RCC->CIR = 0x00000000U;
+	  /* Reset USARTSW[1:0], I2CSW and TIMs bits */
+	  RCC->CFGR3 &= 0xFF00FCCCU;
 
-#ifdef VECT_TAB_SRAM
-  SCB->VTOR = SRAM_BASE | VECT_TAB_OFFSET; /* Vector Table Relocation in Internal SRAM */
-#else
-  SCB->VTOR = FLASH_BASE | VECT_TAB_OFFSET; /* Vector Table Relocation in Internal FLASH */
-#endif
+	  /* Disable all interrupts */
+	  RCC->CIR = 0x00000000U;
+
+	#ifdef VECT_TAB_SRAM
+	  SCB->VTOR = SRAM_BASE | VECT_TAB_OFFSET; /* Vector Table Relocation in Internal SRAM */
+	#else
+	  SCB->VTOR = FLASH_BASE | VECT_TAB_OFFSET; /* Vector Table Relocation in Internal FLASH */
+	#endif
+
+}
+
+void SystemClock_Conf(void)
+{
+
+  RCC_OscInitTypeDef RCC_OscInitStruct;
+  RCC_ClkInitTypeDef RCC_ClkInitStruct;
+  RCC_PeriphCLKInitTypeDef PeriphClkInit;
+
+    /**Initializes the CPU, AHB and APB busses clocks
+    */
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+  RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+  RCC_OscInitStruct.HSEPredivValue = RCC_HSE_PREDIV_DIV1;
+  RCC_OscInitStruct.HSIState = RCC_HSI_ON;
+  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+  RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL9;
+  if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+  {
+    //_Error_Handler(__FILE__, __LINE__);
+  }
+
+    /**Initializes the CPU, AHB and APB busses clocks
+    */
+  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
+                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
+  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
+  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)
+  {
+    //_Error_Handler(__FILE__, __LINE__);
+  }
+
+  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_USB;
+  PeriphClkInit.USBClockSelection = RCC_USBCLKSOURCE_PLL_DIV1_5;
+  if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
+  {
+    //_Error_Handler(__FILE__, __LINE__);
+  }
+
+    /**Configure the Systick interrupt time
+    */
+  HAL_SYSTICK_Config(HAL_RCC_GetHCLKFreq()/1000);
+
+    /**Configure the Systick
+    */
+  HAL_SYSTICK_CLKSourceConfig(SYSTICK_CLKSOURCE_HCLK);
+
+  /* SysTick_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(SysTick_IRQn, 0, 0);
 }
 
 void SetSystemClock_OLD2(void)
@@ -175,6 +266,7 @@ uint8_t SetSysClock_PLL_HSE2(uint8_t bypass)
     RCC_OscInitStruct.PLL.PLLState        = RCC_PLL_ON;
     RCC_OscInitStruct.PLL.PLLSource       = RCC_PLLSOURCE_HSE;
     //RCC_OscInitStruct.PLL.PREDIV          = RCC_PREDIV_DIV1;
+    RCC_OscInitStruct.HSEPredivValue      = RCC_HSE_PREDIV_DIV1;
     RCC_OscInitStruct.PLL.PLLMUL          = RCC_PLL_MUL9; // 72 MHz (8 MHz * 9)
     if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK) {
         return 0; // FAIL
@@ -206,15 +298,16 @@ uint8_t SetSysClock_PLL_HSE2(uint8_t bypass)
 }
 void SetSysClock(void)
 {
+	//SystemClock_Conf();
 
         /* 2- If fail try to start with HSE and external xtal */
         if (SetSysClock_PLL_HSE2(0) == 0)
 
         {
             {
-                while(1) {
-                    MBED_ASSERT(1);
-                }
+                //while(1) {
+                //    MBED_ASSERT(1);
+                //}
             }
         }
     }

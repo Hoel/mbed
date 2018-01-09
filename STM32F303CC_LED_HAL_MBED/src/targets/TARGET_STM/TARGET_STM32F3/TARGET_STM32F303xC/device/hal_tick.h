@@ -45,19 +45,19 @@
 #include <TARGET_STM32F303xC/device/cmsis_nvic.h>
 #include <stm32f3xx_hal.h>
 
-#define TIM_MST      TIM2
-#define TIM_MST_IRQ  TIM2_IRQn
-#define TIM_MST_RCC  __TIM2_CLK_ENABLE()
-#define TIM_MST_DBGMCU_FREEZE  __HAL_DBGMCU_FREEZE_TIM2()
+#define TIM_MST      				TIM2
+#define TIM_MST_IRQ  				TIM2_IRQn
+#define TIM_MST_RCC  				__TIM2_CLK_ENABLE()
+#define TIM_MST_DBGMCU_FREEZE  		__HAL_DBGMCU_FREEZE_TIM2()
 
-#define TIM_MST_RESET_ON   __TIM2_FORCE_RESET()
-#define TIM_MST_RESET_OFF  __TIM2_RELEASE_RESET()
+#define TIM_MST_RESET_ON   			__TIM2_FORCE_RESET()
+#define TIM_MST_RESET_OFF  			__TIM2_RELEASE_RESET()
 
-#define TIM_MST_16BIT  0 // 1=16-bit timer, 0=32-bit timer
+#define TIM_MST_16BIT  				1 // 1=16-bit timer, 0=32-bit timer
 
-#define TIM_MST_PCLK  1 // Select the peripheral clock number (1 or 2)
+#define TIM_MST_PCLK  				2 // Select the peripheral clock number (1 or 2)
 
-#define HAL_TICK_DELAY (1000) // 1 ms
+#define HAL_TICK_DELAY 				(1000) // 1 ms
 
 #ifdef __cplusplus
 }
